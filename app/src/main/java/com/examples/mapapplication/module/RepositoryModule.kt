@@ -18,7 +18,7 @@ object RepositoryModule {
     @Provides
     fun provideRepository(
         foodTruckApiService: FoodTruckApiService
-    ): FoodTruckRepository{
-         return FoodTruckRepositoryImpl(foodTruckApiService)
+    ): FoodTruckRepository {
+        return FoodTruckRepositoryImpl(foodTruckApiService)
     }
 }

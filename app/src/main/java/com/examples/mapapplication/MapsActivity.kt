@@ -13,8 +13,9 @@ import dagger.hilt.android.AndroidEntryPoint
 class MapsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMapsBinding
-//    private lateinit var viewModel: MainViewModel
-    private val viewModel:MainViewModel by viewModels()
+
+    //    private lateinit var viewModel: MainViewModel
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -2,8 +2,8 @@ package com.examples.mapapplication.data
 
 data class TruckSchedule(
     val applicant: String,
-    val location:String,
-    val locationdesc:String?,
+    val location: String,
+    val locationdesc: String?,
 //    val dayorder: Int,
     val start24: String,
     val end24: String,
@@ -12,4 +12,4 @@ data class TruckSchedule(
 //    val dayofweekstr: String,
     val latitude: Double,
     val longitude: Double,
-    )
+)
