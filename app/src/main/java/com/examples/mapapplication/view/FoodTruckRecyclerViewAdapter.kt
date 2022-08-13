@@ -1,11 +1,12 @@
-package com.examples.mapapplication
+package com.examples.mapapplication.view
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.examples.mapapplication.data.TruckSchedule
+import com.examples.mapapplication.R
+import com.examples.mapapplication.model.TruckSchedule
 
 
 class FoodTruckRecyclerViewAdapter(
@@ -25,8 +26,7 @@ class FoodTruckRecyclerViewAdapter(
 
     override fun getItemCount(): Int = scheduleList.size
 
-    inner class ViewHolder(view: View) :
-        RecyclerView.ViewHolder(view) {
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val truckName: TextView = view.findViewById(R.id.truck_name)
         val truckAddr: TextView = view.findViewById(R.id.truck_address)
         val truckDesc: TextView = view.findViewById(R.id.truck_desc)

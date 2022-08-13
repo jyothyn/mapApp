@@ -1,4 +1,4 @@
-package com.examples.mapapplication
+package com.examples.mapapplication.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.RecyclerView
+import com.examples.mapapplication.databinding.FragmentFoodTruckListBinding
 import com.examples.mapapplication.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,15 +19,12 @@ class FoodTruckListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_food_truck_list, container, false)
-
-        if (view is RecyclerView) {
-            with(view) {
-                mvm.scheduleList.observe(viewLifecycleOwner) { schList ->
-                    adapter = FoodTruckRecyclerViewAdapter(schList)
-                }
-            }
+        val binding = FragmentFoodTruckListBinding.inflate(layoutInflater)
+//        val view = inflater.inflate(R.layout.fragment_food_truck_list, container, false)
+        mvm.scheduleList.observe(viewLifecycleOwner) { schList ->
+            binding.recyclerView.adapter = FoodTruckRecyclerViewAdapter(schList)
         }
-        return view
+//        return view
+        return binding.root
     }
 }

@@ -1,6 +1,6 @@
 package com.examples.mapapplication.service
 
-import com.examples.mapapplication.data.TruckSchedule
+import com.examples.mapapplication.model.TruckSchedule
 import retrofit2.http.GET
 import retrofit2.http.Query
 

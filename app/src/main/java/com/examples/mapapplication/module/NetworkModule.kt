@@ -22,8 +22,9 @@ object NetworkModule {
     private val moshi = Moshi.Builder()
         .add(KotlinJsonAdapterFactory())
         .build()
-    val logging = HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
-    val httpClient = OkHttpClient.Builder().apply {
+    private val logging =
+        HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
+    private val httpClient = OkHttpClient.Builder().apply {
         addInterceptor(logging)
     }
 

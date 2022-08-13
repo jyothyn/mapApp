@@ -1,4 +1,4 @@
-package com.examples.mapapplication.data
+package com.examples.mapapplication.model
 
 data class TruckSchedule(
     val applicant: String,
