@@ -40,7 +40,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:text="@string/map"
+            android:onClick="@{vm::openPostersList}"
+            android:text="@{vm.showList ? @string/map : @string/list}"
             app:layout_constraintBottom_toBottomOf="@id/toolbar"
             app:layout_constraintEnd_toEndOf="@id/toolbar" />
 

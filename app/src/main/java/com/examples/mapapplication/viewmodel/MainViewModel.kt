@@ -1,5 +1,7 @@
 package com.examples.mapapplication.viewmodel
 
+import android.view.View
+import android.widget.Button
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -30,7 +32,18 @@ class MainViewModel @Inject constructor(
     val state: StateFlow<List<TruckSchedule>>
         get() = _state
 
-    var showListFrag = true
+    val showList = MutableLiveData(true)
+    fun openPostersList(view: View) {
+        if (view is Button) {
+            view.avoidDoubleClick()
+            showList.postValue(!(showList.value ?: true))
+        }
+    }
+
+    private fun View.avoidDoubleClick() {
+        this.isEnabled = false
+        this.postDelayed({ this.isEnabled = true }, 1000)
+    }
 
     private var exceptionHandler: CoroutineExceptionHandler =
         CoroutineExceptionHandler { _, throwable ->

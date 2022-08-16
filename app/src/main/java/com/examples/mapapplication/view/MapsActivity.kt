@@ -12,42 +12,45 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MapsActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityMapsBinding
-
+    //    private lateinit var binding: ActivityMapsBinding
     //    private lateinit var viewModel: MainViewModel
     private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMapsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        setSupportActionBar(binding.toolbar)
-        binding.lifecycleOwner = this
+        val binding = ActivityMapsBinding.inflate(layoutInflater)
+        with(binding) {
+            setContentView(this.root)
+            // add action bar
+            setSupportActionBar(this.toolbar)
+            supportActionBar?.subtitle = "Today's schedule"
+            // set lifecycleOwner to be able to change display text on liveData change
+            this.lifecycleOwner = this@MapsActivity
+            this.vm = viewModel
 //        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-        showFragment(FoodTruckListFragment())
-        binding.progressIndicator.visibility = View.GONE
-
-        binding.menuButton.let { link ->
-            link.setOnClickListener {
-                it.avoidDoubleClick()
-                viewModel.showListFrag = !viewModel.showListFrag
-                link.text =
-                    if (viewModel.showListFrag) getString(R.string.map) else getString(R.string.list)
-                if (viewModel.showListFrag) showFragment(FoodTruckListFragment())
+            this.progressIndicator.visibility = View.GONE
+            viewModel.showList.observe(this@MapsActivity) {
+                if (it) showFragment(FoodTruckListFragment())
                 else showFragment(MapsFragment())
             }
         }
+        // when only using viewBinding, not dataBinding.
+//        showFragment(FoodTruckListFragment())
+//        binding.menuButton.let { link ->
+//            link.setOnClickListener {
+//                it.avoidDoubleClick()
+//                viewModel.isListDisplayed.let { isList ->
+//                    if (isList.value == false) showFragment(FoodTruckListFragment())
+//                    else showFragment(MapsFragment())
+//                    viewModel.isListDisplayed.postValue(!(isList.value ?: false))
+//                }
+//            }
+//        }
     }
 
     private fun showFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
             .replace(R.id.container, fragment)
             .commitNow()
-    }
-
-    private fun View.avoidDoubleClick() {
-        this.isEnabled = false
-        this.postDelayed({ this.isEnabled = true }, 1000)
     }
 }

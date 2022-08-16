@@ -59,7 +59,7 @@ class MapsFragment : Fragment() {
 //        }
         lifecycleScope.launchWhenResumed {
             viewModel.state.collect {
-                locationList = it as MutableList<TruckSchedule>
+                if (it.isNotEmpty()) locationList = it as MutableList<TruckSchedule>
             }
         }
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?

@@ -18,8 +18,8 @@ class FoodTruckListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val binding = FragmentFoodTruckListBinding.inflate(layoutInflater)
+    ): View {
+        val binding = FragmentFoodTruckListBinding.inflate(inflater)
 //        val view = inflater.inflate(R.layout.fragment_food_truck_list, container, false)
         mvm.scheduleList.observe(viewLifecycleOwner) { schList ->
             binding.recyclerView.adapter = FoodTruckRecyclerViewAdapter(schList)
